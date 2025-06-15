@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand: 37 99 235;
+  --color-brand-light: 96 165 250;
+  --color-bg: 255 255 255;
+  --color-text: 15 23 42;
+  --color-muted: 100 116 139;
+}
+
+.dark {
+  --color-bg: 0 0 0;
+  --color-text: 255 255 255;
+  --color-muted: 148 163 184;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-[rgb(var(--color-bg))] text-[rgb(var(--color-text))] transition-colors duration-300;
+  font-family: "poppins", sans-serif;
+}
