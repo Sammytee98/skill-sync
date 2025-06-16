@@ -31,7 +31,7 @@ const Header = () => {
       initial={{ opacity: 0, y: "-100%" }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-30 w-full shadow-md px-5 md:px-10 py-2"
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-[rgb(var(--color-bg))] shadow-md px-5 md:px-10 py-2"
     >
       <div className="flex justify-between items-center">
         <Link
