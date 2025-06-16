@@ -6,12 +6,14 @@
   --color-bg: 255 255 255;
   --color-text: 15 23 42;
   --color-muted: 100 116 139;
+  --color-border: 216, 216, 216;
 }
 
 .dark {
   --color-bg: 0 0 0;
   --color-text: 255 255 255;
   --color-muted: 148 163 184;
+  --color-border: 61, 61, 61;
 }
 
 html {
