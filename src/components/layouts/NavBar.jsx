@@ -14,7 +14,7 @@ const NavBar = ({ navLink }) => {
             "transition-colors",
             pathname === link.path
               ? "text-[rgb(var(--color-brand))]"
-              : "text-[rgb(var(--color-muted))] hover:text-[rgb(var(--color-brand))]"
+              : "text-[rgb(var(--color-muted))] hover:text-[rgb(var(--color-brand-hover))]"
           )}
         >
           {link.label}

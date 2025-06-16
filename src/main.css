@@ -2,16 +2,22 @@
 
 :root {
   --color-brand: 37 99 235;
-  --color-brand-light: 96 165 250;
+  --color-brand-hover: 96 165 250;
   --color-bg: 255 255 255;
+  --color-bg-neutral: 245 245 245;
   --color-text: 15 23 42;
+  --color-text-neutral: 82, 82, 82;
   --color-muted: 100 116 139;
   --color-border: 216, 216, 216;
 }
 
 .dark {
   --color-bg: 0 0 0;
+  --color-bg-neutral: 23 23 23;
+  --color-brand: 96 165 250;
+  --color-brand-hover: 37 99 235;
   --color-text: 255 255 255;
+  --color-text-neutral: 212 212 212;
   --color-muted: 148 163 184;
   --color-border: 61, 61, 61;
 }
