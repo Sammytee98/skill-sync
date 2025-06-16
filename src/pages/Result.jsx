@@ -1,5 +1,5 @@
-const Resume = () => {
+const Result = () => {
   return <main>Result</main>;
 };
 
-export default Resume;
+export default Result;
