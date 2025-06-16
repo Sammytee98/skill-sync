@@ -14,7 +14,7 @@ const Button = ({
 
   const variants = {
     primary:
-      "text-sm bg-[rgb(var(--color-brand))] border-[rgb(var(--color-brand))] hover:bg-[rgb(var(--color-brand-light))] hover:border-[rgb(var(--color-brand-light))] text-white ",
+      "text-sm bg-[rgb(var(--color-brand))] border-[rgb(var(--color-brand))] hover:bg-[rgb(var(--color-brand-hover))] hover:border-[rgb(var(--color-brand-hover))] text-white ",
     outline:
       "bg-white border-[rgb(var(--color-text))] hover:bg-[rgb(var(--color-text))] text-[rgb(var(--color-text))] hover:text-white text-sm",
   };
