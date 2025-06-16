@@ -14,10 +14,10 @@ const MainLayout = () => {
   }, [theme]);
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="relative w-full h-screen flex flex-col">
       <Header />
       <ScrollToTop />
-      <main className="grow">
+      <main className="grow mt-12">
         <AnimatePresence mode="wait">
           <Outlet key={location.pathname} />
         </AnimatePresence>
