@@ -1,4 +1,4 @@
-const Input = ({ label, id, rows = 5, error, ...props }) => {
+const Input = ({ label, id, rows = 5, value, onChange, error, ...props }) => {
   return (
     <div className="w-full space-y-1">
       {label && (
@@ -8,9 +8,11 @@ const Input = ({ label, id, rows = 5, error, ...props }) => {
       )}
 
       <textarea
+        onChange={onChange}
         id={id}
         rows={rows}
-        className={`w-full px-4 py-2 border-[rgb(var(--color-border))] text-base rounded-md shadow-sm border-2 outline-none transition-all duration-200 ${
+        value={value}
+        className={`w-full px-4 py-2 border-[rgb(var(--color-border))] text-base resize-none rounded-md shadow-sm border-2 outline-none transition-all duration-200 ${
           error
             ? "border-red-500"
             : "border-transparent focus:border-[rgb(var(--color-brand))]"
