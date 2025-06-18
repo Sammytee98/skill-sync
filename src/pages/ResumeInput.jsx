@@ -10,8 +10,7 @@ import UploadBlock from "../components/resume/UploadBlock";
 
 const ResumeInput = () => {
   const navigate = useNavigate();
-  const { resumeText, setResumeText } = useResumeStore();
-  const [fileName, setFileName] = useState("");
+  const { fileName, resumeText, setFileName, setResumeText } = useResumeStore();
   const [uploadErr, setUploadErr] = useState("");
   const [progress, setProgress] = useState(0);
   const [isParsing, setIsParsing] = useState(false);
@@ -37,6 +36,8 @@ const ResumeInput = () => {
       setResumeText(parsedText);
       setProgress(100);
     } catch (err) {
+      console.log("Error:", err);
+
       setUploadErr(err.message);
       setProgress(0);
     } finally {
@@ -46,7 +47,6 @@ const ResumeInput = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     if (file) handleUpload(file);
   };
@@ -95,12 +95,7 @@ const ResumeInput = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <Button
-          children="Next Step"
-          onClick={handleNext}
-          disabled={isEmpty}
-          className={isEmpty && "opacity-30 cursor-not-allowed"}
-        />
+        <Button children="Next Step" onClick={handleNext} disabled={isEmpty} />
       </div>
     </SectionWrapper>
   );
