@@ -9,6 +9,12 @@
   --color-text-neutral: 82, 82, 82;
   --color-muted: 100 116 139;
   --color-border: 216, 216, 216;
+  --color-tech-skills-bg: 219, 234, 254;
+  --color-tech-skills-text: 30, 64, 175;
+  --color-soft-skills-bg: 216, 180, 254;
+  --color-soft-skills-text: 91, 33, 182;
+  --color-outline-button: 212, 212, 212;
+  --color-modal: 255, 255, 255;
 }
 
 .dark {
@@ -20,6 +26,12 @@
   --color-text-neutral: 212 212 212;
   --color-muted: 148 163 184;
   --color-border: 61, 61, 61;
+  --color-tech-skills-bg: 30, 58, 138;
+  --color-tech-skills-text: 191, 219, 254;
+  --color-soft-skills-bg: 76, 29, 149;
+  --color-soft-skills-text: 233, 213, 255;
+  --color-outline-button: 64, 64, 64;
+  --color-modal: 23, 23, 23;
 }
 
 html {
