@@ -6,11 +6,13 @@ const useResumeStore = create()(
     (set) => ({
       fileName: "",
       resumeText: "",
+      resumeInsights: {},
       setFileName: (name) => set({ fileName: name }),
       setResumeText: (text) => set({ resumeText: text }),
+      setResumeInsights: (data) => set({ resumeInsights: data }),
     }),
     {
-      name: "resume-data",
+      name: "resume-storage",
     }
   )
 );

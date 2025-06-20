@@ -1,20 +1,28 @@
+import { useState } from "react";
 import SectionWrapper from "../components/layouts/SectionWrapper";
 import StepIndicator from "../components/ui/StepIndicator";
 import Textarea from "../components/ui/Textarea";
 import Button from "../components/ui/Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import UploadBlock from "../components/resume/UploadBlock";
 import useResumeStore from "../store/useResumeStore";
 import { parseResumeFile } from "../utils/parseResumeFile";
-import UploadBlock from "../components/resume/UploadBlock";
+import { extractResumeInsights } from "../utils/extractResumeInsights";
+import ScrollableModal from "../components/resume/SrollableModal";
 
 const ResumeInput = () => {
-  const navigate = useNavigate();
-  const { fileName, resumeText, setFileName, setResumeText } = useResumeStore();
+  const {
+    fileName,
+    resumeText,
+    resumeInsights,
+    setFileName,
+    setResumeText,
+    setResumeInsights,
+  } = useResumeStore();
   const [uploadErr, setUploadErr] = useState("");
   const [progress, setProgress] = useState(0);
   const [isParsing, setIsParsing] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleUpload = async (file) => {
     if (!file) return;
@@ -31,9 +39,12 @@ const ResumeInput = () => {
         if (fakeProgress >= 90) clearInterval(interval);
       }, 80);
 
-      const parsedText = await parseResumeFile(file);
+      const text = await parseResumeFile(file);
+      // const insights = ;
+
       setFileName(file.name);
-      setResumeText(parsedText);
+      setResumeText(text);
+      setResumeInsights(extractResumeInsights(text));
       setProgress(100);
     } catch (err) {
       console.log("Error:", err);
@@ -44,15 +55,12 @@ const ResumeInput = () => {
       setIsParsing(false);
     }
   };
+  // console.log(resumeInsights);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
     if (file) handleUpload(file);
-  };
-
-  const handleNext = () => {
-    navigate("/job");
   };
 
   const isEmpty = resumeText.trim().length === 0;
@@ -95,8 +103,18 @@ const ResumeInput = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <Button children="Next Step" onClick={handleNext} disabled={isEmpty} />
+        <Button
+          children="Next Step"
+          onClick={() => setShowPreview(true)}
+          disabled={isEmpty}
+        />
       </div>
+
+      <ScrollableModal
+        showPreview={showPreview}
+        resumeInsights={resumeInsights}
+        setShowPreview={setShowPreview}
+      />
     </SectionWrapper>
   );
 };
