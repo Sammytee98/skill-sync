@@ -4,28 +4,31 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const ResumeGuard = ({ children }) => {
-  const { resumeText, resumeInsight } = useResumeStore();
-  const { skills } = resumeInsight;
+  const { resumeText, resumeInsights } = useResumeStore();
   const location = useLocation();
+  console.log(resumeInsights);
+  console.log(resumeText);
 
-  const hasResume =
-    resumeText.trim() > 0 ||
-    skills.technical.length > 0 ||
-    skills.soft.length > 0;
+  const skills = resumeInsights?.skills;
+  const hasSkills = skills?.technical?.length > 0 || skills?.soft?.length > 0;
+  const hasResume = resumeText.trim().length > 0 && hasSkills;
+  console.log(hasResume);
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const hasShownToast = useRef(false);
 
   useEffect(() => {
     if (!hasResume && !hasShownToast.current) {
-      toast.error("Please upload your resume first.");
-      hasShownToast.current = true;
-      setShouldRedirect(true);
+      setTimeout(() => {
+        toast.error("Please upload your resume first.");
+        hasShownToast.current = true;
+        setShouldRedirect(true);
+      }, 200);
     }
   }, [hasResume]);
 
   if (shouldRedirect) {
-    return <Navigate to="\resume" state={{ from: location }} replace />;
+    return <Navigate to="/resume" state={{ from: location }} replace />;
   }
 
   return children;

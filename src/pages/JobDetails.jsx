@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useJobStore } from "../store/useJobStore";
 import { stripHtml } from "../utils/stripHtml";
 import SectionWrapper from "../components/layouts/SectionWrapper";
+import BackButton from "../components/ui/BackButton";
 
 const JobDetails = () => {
   const navigate = useNavigate();
@@ -37,6 +38,9 @@ const JobDetails = () => {
 
   return (
     <main className="max-w-3xl mx-auto">
+      <div className="py-6 px-4">
+        <BackButton />
+      </div>
       <SectionWrapper>
         <h2 className="text-2xl font-bold mb-2">{title}</h2>
         <p className="text-[rgb(var(--color-text-neutral))]">

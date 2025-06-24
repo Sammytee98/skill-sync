@@ -9,7 +9,6 @@ const ScrollableModal = ({ showPreview, setShowPreview }) => {
   const navigate = useNavigate();
   const { resumeInsights } = useResumeStore();
   const { addSkill, removeSkill } = useResumeActions();
-  console.log(resumeInsights);
 
   const handleContinue = () => {
     setShowPreview(false);
