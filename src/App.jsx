@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayouts";
 import Home from "./pages/Home";
 import ResumeInput from "./pages/ResumeInput";
-import JobInput from "./pages/JobInput";
+import Jobs from "./pages/Jobs";
 import Result from "./pages/Result";
 import JobDetails from "./pages/JobDetails";
 
@@ -13,9 +13,9 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="resume" element={<ResumeInput />} />
-          <Route path="job" element={<JobInput />} />
-          <Route path="job/:id" element={<JobDetails />} />
-          <Route path="result" element={<Result />} />
+          <Route path="resume/result" element={<Result />} />
+          <Route path="resume/result/jobs" element={<Jobs />} />
+          <Route path="resume/result/jobs/:id" element={<JobDetails />} />
         </Route>
       </Routes>
     </>

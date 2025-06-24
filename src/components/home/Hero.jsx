@@ -29,12 +29,12 @@ const Hero = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="w-full h-full rounded-full"
+        className="w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] rounded-full mx-auto"
       >
         <img
           src={AiIllustrator}
           alt="Ai reveiwing resume with magnifying glass"
-          className="w-full h-auto object-contains rounded-full"
+          className="w-full h-full  object-contains rounded-full"
         />
       </motion.div>
     </>
