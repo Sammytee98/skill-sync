@@ -40,7 +40,6 @@ const ResumeInput = () => {
       }, 80);
 
       const text = await parseResumeFile(file);
-      // const insights = ;
 
       setFileName(file.name);
       setResumeText(text);
@@ -55,7 +54,6 @@ const ResumeInput = () => {
       setIsParsing(false);
     }
   };
-  // console.log(resumeInsights);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
