@@ -3,6 +3,7 @@ import { useJobStore } from "../store/useJobStore";
 import { stripHtml } from "../utils/stripHtml";
 import SectionWrapper from "../components/layouts/SectionWrapper";
 import BackButton from "../components/ui/BackButton";
+import { motion } from "framer-motion";
 
 const JobDetails = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const JobDetails = () => {
       <div className="p-10 text-center">
         <p className="text-red-500 font-medium">Job not found</p>
         <button
-          onClick={() => navigate("/job")}
+          onClick={() => navigate("/resume/result/jobs")}
           className="mt-4 text-[rgb(var(--color-brand))] hover:underline cursor-pointer"
         >
           Back to Job Listing
@@ -37,7 +38,13 @@ const JobDetails = () => {
   const cleanedDesc = stripHtml(description);
 
   return (
-    <main className="max-w-3xl mx-auto">
+    <motion.main
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -50, opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="max-w-3xl mx-auto"
+    >
       <div className="py-6 px-4">
         <BackButton />
       </div>
@@ -89,7 +96,7 @@ const JobDetails = () => {
           Apply Now
         </a>
       </SectionWrapper>
-    </main>
+    </motion.main>
   );
 };
 
