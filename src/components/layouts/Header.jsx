@@ -11,9 +11,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLink = [
     { label: "Home", path: "/" },
-    { label: "Resume", path: "/resume" },
-    { label: "Result", path: "/resume/result" },
-    { label: "Jobs", path: "/resume/jobs" },
+    { label: "Get Started", path: "/resume" },
   ];
 
   const toggleMenu = useCallback(
