@@ -13,7 +13,7 @@ const ScrollableModal = ({ showPreview, setShowPreview }) => {
 
   const handleContinue = () => {
     setShowPreview(false);
-    navigate("/job");
+    navigate("result");
   };
 
   const handleAddSkill = (type) => {
@@ -37,7 +37,7 @@ const ScrollableModal = ({ showPreview, setShowPreview }) => {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="fixed inset-0 z-50 bg-black/60 flex justify-center items-center"
         >
           <div className="bg-[rgb(var(--color-modal))] w-[90%] max-w-2xl max-h-[85svh] p-6 rounded-xl shadow-3xl overflow-y-auto space-y-6">

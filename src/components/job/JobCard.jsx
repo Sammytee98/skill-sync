@@ -28,7 +28,7 @@ const JobCard = ({ job }) => {
       </div>
 
       <Link
-        to={`/job/${id}`}
+        to={`${id}`}
         className="flex items-center space-x-1 text-sm font-medium text-[rgb(var(--color-brand))] hover:text-[rgb(var(--color-brand-hover))] transition cursor-pointer"
       >
         <span>View Detail</span> <FaArrowRight className="w-3 h-3" />
