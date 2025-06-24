@@ -9,6 +9,8 @@ import SectionWrapper from "../components/layouts/SectionWrapper";
 import Button from "../components/ui/Button";
 import { HiArrowRight } from "react-icons/hi2";
 import BackButton from "../components/ui/BackButton";
+import { motion } from "framer-motion";
+import StepIndicator from "../components/ui/StepIndicator";
 
 const Result = () => {
   const navigate = useNavigate();
@@ -47,7 +49,12 @@ const Result = () => {
   const topSkill = skills.technical[0] || skills.soft[0] || "-";
 
   return (
-    <main>
+    <motion.main
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -50, opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {loading && (
         <div className="flex items-center space-x-2 mt-5 mx-auto w-fit">
           <LoadingSpinner color="blue" />{" "}
@@ -64,7 +71,7 @@ const Result = () => {
 
       {jobs && !loading && (
         <SectionWrapper className="max-w-xl text-center space-y-10 text-[rgb(var(--color-text-neutral)] mx-auto">
-          <BackButton />
+          <BackButton to="/resume" />
           <h2 className="text-3xl font-bold">Job Matches Ready</h2>
 
           <div className="space-y-5 text-lg">
@@ -96,7 +103,7 @@ const Result = () => {
           </Button>
         </SectionWrapper>
       )}
-    </main>
+    </motion.main>
   );
 };
 
