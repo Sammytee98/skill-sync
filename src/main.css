@@ -13,7 +13,10 @@
   --color-tech-skills-text: 30, 64, 175;
   --color-soft-skills-bg: 216, 180, 254;
   --color-soft-skills-text: 91, 33, 182;
-  --color-outline-button: 212, 212, 212;
+  --color-outline-btn: 212, 212, 212;
+  --color-danger-btn: 239, 68, 68;
+  --color-danger-btn-text: 239, 68, 68;
+  --color-danger-btn-bg: 254, 226, 226;
   --color-modal: 255, 255, 255;
 }
 
@@ -30,7 +33,10 @@
   --color-tech-skills-text: 191, 219, 254;
   --color-soft-skills-bg: 76, 29, 149;
   --color-soft-skills-text: 233, 213, 255;
-  --color-outline-button: 64, 64, 64;
+  --color-outline-btn: 38, 38, 38;
+  --color-danger-btn: 220, 38, 38;
+  --color-danger-btn-text: 254, 226, 226;
+  --color-danger-btn-bg: 157, 27, 27;
   --color-modal: 23, 23, 23;
 }
 

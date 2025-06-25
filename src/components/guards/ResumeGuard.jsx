@@ -2,30 +2,33 @@ import useResumeStore from "../../store/useResumeStore";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import useGuardStore from "../../store/useGuardStore";
 
 const ResumeGuard = ({ children }) => {
   const { resumeText, resumeInsights } = useResumeStore();
+  const { shouldShowToast, setShouldShowToast } = useGuardStore();
   const location = useLocation();
-  console.log(resumeInsights);
-  console.log(resumeText);
 
   const skills = resumeInsights?.skills;
   const hasSkills = skills?.technical?.length > 0 || skills?.soft?.length > 0;
-  const hasResume = resumeText.trim().length > 0 && hasSkills;
-  console.log(hasResume);
+  const hasResume = resumeText?.trim().length > 0 && hasSkills;
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const hasShownToast = useRef(false);
 
   useEffect(() => {
-    if (!hasResume && !hasShownToast.current) {
-      setTimeout(() => {
-        toast.error("Please upload your resume first.");
-        hasShownToast.current = true;
-        setShouldRedirect(true);
-      }, 200);
+    if (!hasShownToast.current && !hasResume) {
+      setShouldRedirect(true);
+      hasShownToast.current = true;
     }
   }, [hasResume]);
+
+  useEffect(() => {
+    if (shouldShowToast) {
+      toast.error("Please upload your resume first.", { duration: 5000 });
+      setShouldShowToast(false);
+    }
+  }, [shouldShowToast]);
 
   if (shouldRedirect) {
     return <Navigate to="/resume" state={{ from: location }} replace />;

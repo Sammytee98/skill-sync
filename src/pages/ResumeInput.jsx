@@ -9,6 +9,7 @@ import { parseResumeFile } from "../utils/parseResumeFile";
 import { extractResumeInsights } from "../utils/extractResumeInsights";
 import ScrollableModal from "../components/resume/SrollableModal";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 const ResumeInput = () => {
   const {
@@ -71,11 +72,12 @@ const ResumeInput = () => {
       exit={{ y: -50, opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      <Toaster position="top-center" reverseOrder={false} />
       <SectionWrapper className="space-y-10">
         <h2 className="text-2xl font-bold">Let's Start With Your Resume</h2>
         <p className="text-base text-[rgb(var(--color-muted))]">
           Upload a resume or paste it below &mdash; we'll use it to find the
-          bestjob match for you.
+          best job match for you.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
