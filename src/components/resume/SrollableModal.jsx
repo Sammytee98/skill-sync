@@ -24,10 +24,14 @@ const ScrollableModal = ({ showPreview, setShowPreview }) => {
     return;
   };
 
-  const {
-    skills: { technical, soft },
-    summary,
-  } = resumeInsights;
+  // const {
+  //   skills: { technical, soft },
+  //   summary,
+  // } = resumeInsights;
+
+  const summary = resumeInsights?.summary;
+  const technical = resumeInsights?.skills?.technical;
+  const soft = resumeInsights?.skills?.soft;
 
   return (
     <>

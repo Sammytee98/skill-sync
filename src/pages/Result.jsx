@@ -10,13 +10,15 @@ import Button from "../components/ui/Button";
 import { HiArrowRight } from "react-icons/hi2";
 import BackButton from "../components/ui/BackButton";
 import { motion } from "framer-motion";
-import StepIndicator from "../components/ui/StepIndicator";
+import toast from "react-hot-toast";
+import useGuardStore from "../store/useGuardStore";
 
 const Result = () => {
   const navigate = useNavigate();
   const { jobs, setJobs } = useJobStore();
-  const { resumeInsights } = useResumeStore();
-  const { skills } = resumeInsights;
+  const { resumeInsights, resetResume } = useResumeStore();
+  const { setShouldShowToast } = useGuardStore();
+  const skills = resumeInsights?.skills;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,16 +39,24 @@ const Result = () => {
 
     getJobs();
   }, [skills]);
-  console.log(jobs);
 
-  const totalMatches = jobs.length;
+  const totalMatches = jobs?.length;
 
   const topMatch = jobs.reduce(
     (best, current) => (current.match > best.match ? current : best),
     jobs[0] || null
   );
 
-  const topSkill = skills.technical[0] || skills.soft[0] || "-";
+  const topSkill = skills?.technical[0] || skills?.soft[0] || "-";
+
+  const handleReset = () => {
+    resetResume();
+    setShouldShowToast(false);
+    navigate("/resume", { state: { skipToast: true } });
+    toast.success("Resume data cleared. Ready to start over!", {
+      duration: 8000,
+    });
+  };
 
   return (
     <motion.main
@@ -54,7 +64,10 @@ const Result = () => {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -50, opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
+      className="px-5 py-6"
     >
+      <BackButton to="/resume" />
+
       {loading && (
         <div className="flex items-center space-x-2 mt-5 mx-auto w-fit">
           <LoadingSpinner color="blue" />{" "}
@@ -70,38 +83,43 @@ const Result = () => {
       )}
 
       {jobs && !loading && (
-        <SectionWrapper className="max-w-xl text-center space-y-10 text-[rgb(var(--color-text-neutral)] mx-auto">
-          <BackButton to="/resume" />
-          <h2 className="text-3xl font-bold">Job Matches Ready</h2>
+        <>
+          <SectionWrapper className="max-w-xl text-center space-y-10 text-[rgb(var(--color-text-neutral)] mx-auto">
+            <h2 className="text-3xl font-bold">Job Matches Ready</h2>
 
-          <div className="space-y-5 text-lg">
-            <p>
-              You have{" "}
-              <strong className="text-green-500">{totalMatches}</strong> job
-              matches based on your resume.
-            </p>
-
-            {topMatch && (
+            <div className="space-y-5 text-lg">
               <p>
-                <strong>Best Match:</strong> {topMatch.title} at{" "}
-                {topMatch.company} &mdash;{" "}
-                <strong className="text-green-500">{topMatch.match}%</strong>{" "}
-                match
+                You have{" "}
+                <strong className="text-green-500">{totalMatches}</strong> job
+                matches based on your resume.
               </p>
-            )}
 
-            <p>
-              <strong>Top Skill:</strong> {topSkill}
-            </p>
-          </div>
+              {topMatch && (
+                <p>
+                  <strong>Best Match:</strong> {topMatch.title} at{" "}
+                  {topMatch.company} &mdash;{" "}
+                  <strong className="text-green-500">{topMatch.match}%</strong>{" "}
+                  match
+                </p>
+              )}
 
-          <Button
-            onClick={() => navigate("jobs")}
-            className="space-x-1.5 mx-auto"
-          >
-            <span>View Matched Jobs</span> <HiArrowRight />
-          </Button>
-        </SectionWrapper>
+              <p>
+                <strong>Top Skill:</strong> {topSkill}
+              </p>
+            </div>
+          </SectionWrapper>
+
+          <SectionWrapper className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Button onClick={() => navigate("jobs")} className="space-x-1.5">
+              <span>View Matched Jobs</span> <HiArrowRight />
+            </Button>
+            <Button
+              onClick={handleReset}
+              children="Start Over"
+              variant="danger"
+            />
+          </SectionWrapper>
+        </>
       )}
     </motion.main>
   );
