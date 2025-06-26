@@ -4,9 +4,15 @@ import BackButton from "../components/ui/BackButton";
 import Button from "../components/ui/Button";
 import JobCard from "../components/job/JobCard";
 import { Toaster } from "react-hot-toast";
+import PaginateJob from "../utils/PaginateJob";
 
 const SavedJob = () => {
-  const { savedJobs, clearSavedJobs, removeJob } = useSavedJobStore();
+  const { savedJobs, clearSavedJobs } = useSavedJobStore();
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const jobsPerPage = 5;
+  const offset = currentPage * jobsPerPage;
+  const currentJobs = jobs.slice(offset, offset + jobsPerPage);
 
   return (
     <main>
@@ -21,12 +27,12 @@ const SavedJob = () => {
         </p>
       )}
       <SectionWrapper className="space-y-10">
-        {savedJobs && (
+        {currentJobs && (
           <>
             <h2 className="text-3xl font-bold text-center">Saved Jobs</h2>
 
             <div className="grid grid-cols-1 max-w-3xl mx-auto gap-8">
-              {savedJobs.map((job, i) => {
+              {currentJobs.map((job, i) => {
                 console.log(job);
 
                 return <JobCard key={i} job={job} />;
@@ -35,6 +41,12 @@ const SavedJob = () => {
           </>
         )}
       </SectionWrapper>
+
+      <PaginateJob
+        jobs={savedJobs}
+        jobsPerPage={jobsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
 
       <SectionWrapper className="max-w-xl mx-auto">
         <Button
