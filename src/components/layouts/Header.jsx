@@ -12,6 +12,7 @@ const Header = () => {
   const navLink = [
     { label: "Home", path: "/" },
     { label: "Get Started", path: "/resume" },
+    { label: "View Saved Jobs", path: "/saved-jobs" },
   ];
 
   const toggleMenu = useCallback(
