@@ -5,6 +5,7 @@ import ResumeInput from "./pages/ResumeInput";
 import Jobs from "./pages/Jobs";
 import Result from "./pages/Result";
 import JobDetails from "./pages/JobDetails";
+import SavedJob from "./pages/SavedJob";
 import ResumeGuard from "./components/guards/ResumeGuard";
 
 const App = () => {
@@ -35,6 +36,14 @@ const App = () => {
             element={
               <ResumeGuard>
                 <JobDetails />
+              </ResumeGuard>
+            }
+          />
+          <Route
+            path="saved-jobs"
+            element={
+              <ResumeGuard>
+                <SavedJob />
               </ResumeGuard>
             }
           />

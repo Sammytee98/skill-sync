@@ -10,7 +10,7 @@ const Button = ({
   ...props
 }) => {
   const baseClasses =
-    "px-6 py-2 rounded-md shadow-md font-chakra font-semibold text-center flex justify-center transition cursor-pointer flex items-center";
+    "px-6 py-1.5 rounded-md shadow-md font-chakra font-semibold text-center flex justify-center transition cursor-pointer flex items-center";
 
   const variants = {
     primary:

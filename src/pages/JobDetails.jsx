@@ -4,6 +4,8 @@ import { stripHtml } from "../utils/stripHtml";
 import SectionWrapper from "../components/layouts/SectionWrapper";
 import BackButton from "../components/ui/BackButton";
 import { motion } from "framer-motion";
+import SaveButton from "../components/ui/SaveButton";
+import { Toaster } from "react-hot-toast";
 
 const JobDetails = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const JobDetails = () => {
       <div className="p-10 text-center">
         <p className="text-red-500 font-medium">Job not found</p>
         <button
-          onClick={() => navigate("/resume/result/jobs")}
+          onClick={() => navigate("/resume/result")}
           className="mt-4 text-[rgb(var(--color-brand))] hover:underline cursor-pointer"
         >
           Back to Job Listing
@@ -45,9 +47,11 @@ const JobDetails = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="max-w-3xl mx-auto"
     >
+      <Toaster position="top-center" />
       <div className="py-6 px-4">
         <BackButton />
       </div>
+
       <SectionWrapper>
         <h2 className="text-2xl font-bold mb-2">{title}</h2>
         <p className="text-[rgb(var(--color-text-neutral))]">
@@ -86,7 +90,7 @@ const JobDetails = () => {
         })}
       </SectionWrapper>
 
-      <SectionWrapper>
+      <SectionWrapper className="flex justify-between">
         <a
           href={url}
           target="_blank"
@@ -95,6 +99,8 @@ const JobDetails = () => {
         >
           Apply Now
         </a>
+
+        <SaveButton job={job} />
       </SectionWrapper>
     </motion.main>
   );
