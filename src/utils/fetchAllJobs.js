@@ -13,7 +13,7 @@ export const fetchAllJobs = async () => {
         id: id,
         title: position,
         company: company,
-        location: location || "Remote",
+        location: location,
         tags: tags,
         description: description,
         url: url,

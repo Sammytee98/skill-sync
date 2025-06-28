@@ -10,7 +10,7 @@ const SectionWrapper = ({ className = "", children }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`py-12 px-4 sm:px-6 lg:px-16 ${className}`}
+      className={`py-8 px-4 sm:px-6 lg:px-16 ${className}`}
     >
       {children}
     </motion.section>

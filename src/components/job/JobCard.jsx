@@ -6,7 +6,7 @@ const JobCard = ({ job }) => {
   const { id, title, company, location, match, source } = job;
 
   return (
-    <div className="py-4 px-4 sm:px-6 md:px-8 lg:px-10 space-y-3 bg-[rgb(var(--color-bg-neutral))] shadow-lg rounded-xl">
+    <div className="py-4 px-4 sm:px-6 md:px-8 lg:px-10 space-y-3 bg-[rgb(var(--color-bg-neutral))] border-b-2 border-[rgb(var(--color-border))]">
       <div className="space-y-2">
         <div className="flex justify-between">
           <div className="space-y-1 pt-2">
@@ -19,7 +19,8 @@ const JobCard = ({ job }) => {
             </p>
 
             <p className="text-[rgb(var(--color-text-neutral))] text-sm">
-              <strong>Location:</strong> {location}
+              <strong>Location:</strong>{" "}
+              {location !== "" ? location : "Unknown"}
             </p>
 
             <p className="text-[rgb(var(--color-text-neutral))] text-sm">

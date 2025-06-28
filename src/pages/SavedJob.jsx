@@ -5,6 +5,7 @@ import Button from "../components/ui/Button";
 import JobCard from "../components/job/JobCard";
 import { Toaster } from "react-hot-toast";
 import PaginateJob from "../utils/PaginateJob";
+import { useState } from "react";
 
 const SavedJob = () => {
   const { savedJobs, clearSavedJobs } = useSavedJobStore();
@@ -12,7 +13,8 @@ const SavedJob = () => {
 
   const jobsPerPage = 5;
   const offset = currentPage * jobsPerPage;
-  const currentJobs = jobs.slice(offset, offset + jobsPerPage);
+  const currentJobs = savedJobs.slice(offset, offset + jobsPerPage);
+  console.log(currentJobs);
 
   return (
     <main>
@@ -21,41 +23,41 @@ const SavedJob = () => {
         <BackButton />
       </div>
 
-      {savedJobs === 0 && (
-        <p className="text-xl text-[rgb(var(--color-muted))] text-center">
+      {savedJobs.length < 1 && (
+        <p className="text-xl text-[rgb(var(--color-muted))] text-center mt-10">
           No Saved Jobs
         </p>
       )}
-      <SectionWrapper className="space-y-10">
-        {currentJobs && (
-          <>
+      {currentJobs.length > 0 && (
+        <>
+          <SectionWrapper className="space-y-10">
             <h2 className="text-3xl font-bold text-center">Saved Jobs</h2>
 
-            <div className="grid grid-cols-1 max-w-3xl mx-auto gap-8">
+            <div className="grid grid-cols-1 max-w-3xl mx-auto">
               {currentJobs.map((job, i) => {
-                console.log(job);
-
                 return <JobCard key={i} job={job} />;
               })}
             </div>
-          </>
-        )}
-      </SectionWrapper>
+          </SectionWrapper>
 
-      <PaginateJob
-        jobs={savedJobs}
-        jobsPerPage={jobsPerPage}
-        setCurrentPage={setCurrentPage}
-      />
+          {currentJobs > 5 && (
+            <PaginateJob
+              jobs={savedJobs}
+              jobsPerPage={jobsPerPage}
+              setCurrentPage={setCurrentPage}
+            />
+          )}
 
-      <SectionWrapper className="max-w-xl mx-auto">
-        <Button
-          onClick={clearSavedJobs}
-          variant="danger"
-          children="Clear Saved Jobs"
-          className="w-full"
-        />
-      </SectionWrapper>
+          <SectionWrapper className="max-w-xl mx-auto">
+            <Button
+              onClick={clearSavedJobs}
+              variant="danger"
+              children="Clear Saved Jobs"
+              className="w-full"
+            />
+          </SectionWrapper>
+        </>
+      )}
     </main>
   );
 };
