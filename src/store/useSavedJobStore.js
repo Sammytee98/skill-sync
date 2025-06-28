@@ -19,7 +19,7 @@ const useSavedJobStore = create(
         set({ savedJobs: filtered });
       },
 
-      clearSavedjobs: () => {
+      clearSavedJobs: () => {
         set({ savedJobs: [] });
       },
     }),
