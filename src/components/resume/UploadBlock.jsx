@@ -76,5 +76,3 @@ const UploadBlock = ({
 };
 
 export default UploadBlock;
-
-// bg-[rgb(var(--color-brand))] hover:bg-[rgb(var(--color-brand-hover))] text-sm text-white px-3 py-2 mt-4  rounded-md shadow-md hover:scale-105 focus:scale-95 transition-all cursor-pointer

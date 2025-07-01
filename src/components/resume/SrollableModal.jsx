@@ -4,30 +4,29 @@ import Button from "../ui/Button";
 import useResumeStore from "../../store/useResumeStore";
 import { useResumeActions } from "../../store/useResumeActions";
 import { FaX, FaPlus } from "react-icons/fa6";
+import { memo, useCallback, useMemo } from "react";
 
 const ScrollableModal = ({ showPreview, setShowPreview }) => {
   const navigate = useNavigate();
   const { resumeInsights } = useResumeStore();
   const { addSkill, removeSkill } = useResumeActions();
 
-  const handleContinue = () => {
+  const handleContinue = useCallback(() => {
     setShowPreview(false);
     navigate("result");
-  };
+  }, []);
 
-  const handleAddSkill = (type) => {
-    const newSkill = prompt(`Enter a new ${type} skill:`);
-    if (newSkill) {
-      addSkill(type, newSkill.trim().toLowerCase());
-    }
+  const handleAddSkill = useCallback(
+    (type) => {
+      const newSkill = prompt(`Enter a new ${type} skill:`);
+      if (newSkill) {
+        addSkill(type, newSkill.trim().toLowerCase());
+      }
 
-    return;
-  };
-
-  // const {
-  //   skills: { technical, soft },
-  //   summary,
-  // } = resumeInsights;
+      return;
+    },
+    [addSkill]
+  );
 
   const summary = resumeInsights?.summary;
   const technical = resumeInsights?.skills?.technical;
@@ -127,4 +126,11 @@ const ScrollableModal = ({ showPreview, setShowPreview }) => {
   );
 };
 
-export default ScrollableModal;
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.showPreview === nextProps.showPreview &&
+    prevProps.setShowPreview === nextProps.setShowPreview
+  );
+};
+
+export default memo(ScrollableModal, areEqual);
