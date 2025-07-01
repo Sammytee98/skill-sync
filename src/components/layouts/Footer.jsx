@@ -1,5 +1,5 @@
 import { useInView, motion } from "framer-motion";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 
 const Footer = () => {
   const ref = useRef(null);
@@ -30,4 +30,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

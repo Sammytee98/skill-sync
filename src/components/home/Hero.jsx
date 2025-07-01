@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../ui/Button";
 import AiIllustrator from "../../assets/ai-illustrator.jpeg";
+import { memo } from "react";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -41,4 +42,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

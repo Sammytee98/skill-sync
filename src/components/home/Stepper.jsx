@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Stepper = () => {
   return (
     <>
@@ -17,4 +19,4 @@ const Stepper = () => {
   );
 };
 
-export default Stepper;
+export default memo(Stepper);
