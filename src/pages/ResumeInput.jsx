@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import SectionWrapper from "../components/layouts/SectionWrapper";
-import StepIndicator from "../components/ui/StepIndicator";
 import Textarea from "../components/ui/Textarea";
 import Button from "../components/ui/Button";
 import UploadBlock from "../components/resume/UploadBlock";
@@ -9,7 +8,7 @@ import { parseResumeFile } from "../utils/parseResumeFile";
 import { extractResumeInsights } from "../utils/extractResumeInsights";
 import ScrollableModal from "../components/resume/SrollableModal";
 import { motion } from "framer-motion";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const ResumeInput = () => {
   const {
@@ -26,7 +25,7 @@ const ResumeInput = () => {
   const [dragOver, setDragOver] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
-  const handleUpload = async (file) => {
+  const handleUpload = useCallback(async (file) => {
     if (!file) return;
 
     setProgress(0);
@@ -47,23 +46,31 @@ const ResumeInput = () => {
       setResumeText(text);
       setResumeInsights(extractResumeInsights(text));
       setProgress(100);
+      toast.success("File uploaded successfully");
     } catch (err) {
       console.log("Error:", err);
 
       setUploadErr(err.message);
+      setResumeText("");
       setProgress(0);
+      toast.error("Failed to upload file");
     } finally {
       setIsParsing(false);
     }
-  };
+  }, []);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = useCallback(
+    (e) => {
+      const file = e.target.files[0];
 
-    if (file) handleUpload(file);
-  };
+      if (file) handleUpload(file);
+    },
+    [handleUpload]
+  );
 
   const isEmpty = resumeText.trim().length === 0;
+
+  const handleNext = useCallback(() => setShowPreview(true), []);
 
   return (
     <motion.main
@@ -110,7 +117,7 @@ const ResumeInput = () => {
         <div className="flex justify-end mt-6">
           <Button
             children="Next Step"
-            onClick={() => setShowPreview(true)}
+            onClick={handleNext}
             disabled={isEmpty}
           />
         </div>

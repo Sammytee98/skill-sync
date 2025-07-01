@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { memo } from "react";
 
 const UploadBlock = ({
   isParsing,
@@ -68,11 +69,34 @@ const UploadBlock = ({
         {uploadErr && <p className="text-xs text-red-500 mt-2">{uploadErr}</p>}
 
         {fileName && !uploadErr && !isParsing && (
-          <p className="text-sm mt-2 text-green-600">✔️ Uploaded: {fileName}</p>
+          <p className="text-sm mt-2 text-green-600">Uploaded: {fileName}</p>
         )}
       </div>
     </>
   );
 };
 
-export default UploadBlock;
+const areEqual = (prevProps, nextProps) => {
+  const parsingProps = prevProps.isParsing === nextProps.isParsing;
+  const progressProps = prevProps.progress === nextProps.progress;
+  const dragOverProps = prevProps.dragOver === nextProps.dragOver;
+  const setDragOverProps = prevProps.setDragOver === nextProps.setDragOver;
+  const handleUploadProps = prevProps.handleUpload === nextProps.handleUpload;
+  const handleFileChangeProps =
+    prevProps.handleFileChange === nextProps.handleFileChange;
+  const errProps = prevProps.uploadErr === nextProps.uploadErr;
+  const fileNameProps = prevProps.fileName === nextProps.fileName;
+
+  return (
+    parsingProps &&
+    progressProps &&
+    dragOverProps &&
+    setDragOverProps &&
+    handleUploadProps &&
+    handleFileChangeProps &&
+    errProps &&
+    fileNameProps
+  );
+};
+
+export default memo(UploadBlock, areEqual);

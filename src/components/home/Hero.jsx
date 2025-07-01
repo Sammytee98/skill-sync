@@ -2,10 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../ui/Button";
 import AiIllustrator from "../../assets/ai-illustrator.jpeg";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 const Hero = () => {
   const navigate = useNavigate();
+
+  const handleClick = useCallback(() => navigate("/resume"), []);
 
   return (
     <>
@@ -23,14 +25,15 @@ const Hero = () => {
           then using AI to find your strengths and gaps. Know exactly where you
           stand.
         </p>
-        <Button onClick={() => navigate("/resume")} children="Start Matching" />
+        <Button onClick={handleClick} children="Start Matching" />
       </motion.div>
 
       <motion.div
+        whileHover={{ scale: 1.02 }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full mx-auto hover:animate-bounce"
+        className="w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full mx-auto"
       >
         <img
           src={AiIllustrator}
