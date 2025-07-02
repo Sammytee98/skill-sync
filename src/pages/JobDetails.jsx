@@ -6,6 +6,7 @@ import BackButton from "../components/ui/BackButton";
 import { motion } from "framer-motion";
 import SaveButton from "../components/ui/SaveButton";
 import { Toaster } from "react-hot-toast";
+import { useMemo } from "react";
 
 const JobDetails = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const JobDetails = () => {
   const url = job?.url;
   const source = job?.source;
 
-  const cleanedDesc = stripHtml(description);
+  const cleanedDesc = useMemo(() => stripHtml(description), [description]);
 
   return (
     <motion.main

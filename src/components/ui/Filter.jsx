@@ -1,5 +1,6 @@
 import { AiOutlineFilter, AiFillFilter } from "react-icons/ai";
 import { motion } from "framer-motion";
+import { memo } from "react";
 
 const Filter = ({
   showDropdown,
@@ -51,4 +52,11 @@ const Filter = ({
   );
 };
 
-export default Filter;
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.showDropdown === nextProps.showDropdown &&
+    prevProps.locationFilter === nextProps.locationFilter
+  );
+};
+
+export default memo(Filter, areEqual);

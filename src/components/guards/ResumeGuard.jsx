@@ -19,6 +19,7 @@ const ResumeGuard = ({ children }) => {
   useEffect(() => {
     if (!hasShownToast.current && !hasResume) {
       setShouldRedirect(true);
+      setShouldShowToast(true);
       hasShownToast.current = true;
     }
   }, [hasResume]);

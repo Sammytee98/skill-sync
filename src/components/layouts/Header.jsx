@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import ThemeToggle from "../ui/ThemeToggle";
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import useWindowSize from "../../hooks/useWindowSize.js";
 
@@ -73,4 +73,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

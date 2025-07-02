@@ -1,15 +1,10 @@
-const Input = ({ label, id, rows = 5, value, onChange, error, ...props }) => {
+import { memo } from "react";
+
+const Input = ({ rows = 5, value, onChange, error, ...props }) => {
   return (
     <div className="w-full space-y-1">
-      {label && (
-        <label htmlFor={id} className="text base font-medium block">
-          {label}
-        </label>
-      )}
-
       <textarea
         onChange={onChange}
-        id={id}
         rows={rows}
         value={value}
         className={`w-full px-4 py-2 border-[rgb(var(--color-border))] text-base resize-none rounded-md shadow-sm border-2 outline-none transition-all duration-200 ${
@@ -23,5 +18,13 @@ const Input = ({ label, id, rows = 5, value, onChange, error, ...props }) => {
     </div>
   );
 };
+const areEqual = (prevProps, nextProps) => {
+  const rowsProps = prevProps.rows === nextProps.rows;
+  const valueProps = prevProps.value === nextProps.value;
+  const onChangeProps = prevProps.onChange === nextProps.onChange;
+  const errorProps = prevProps.error === nextProps.error;
 
-export default Input;
+  return rowsProps && valueProps && onChangeProps && errorProps;
+};
+
+export default memo(Input, areEqual);

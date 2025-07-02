@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { offers } from "../../data/offers";
 import Feature from "../ui/Feature";
 
@@ -17,4 +18,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default memo(Offers);

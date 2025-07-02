@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getJobMatchScore } from "../utils/matchJobsToSkills";
 import useResumeStore from "../store/useResumeStore";
 import { fetchAllJobs } from "../utils/fetchAllJobs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import SectionWrapper from "../components/layouts/SectionWrapper";
 import Button from "../components/ui/Button";
@@ -12,51 +12,75 @@ import BackButton from "../components/ui/BackButton";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import useGuardStore from "../store/useGuardStore";
+import useCachedFetch from "../hooks/useCachedFetch";
 
 const Result = () => {
   const navigate = useNavigate();
   const { jobs, setJobs } = useJobStore();
   const { resumeInsights, resetResume } = useResumeStore();
   const { setShouldShowToast } = useGuardStore();
-  const skills = resumeInsights?.skills;
   const [loading, setLoading] = useState(true);
+  const skills = resumeInsights?.skills;
+  const fetchWithCache = useCachedFetch();
 
   useEffect(() => {
+    let isMounted = true;
+
     const getJobs = async () => {
-      const alljobs = await fetchAllJobs();
-
-      const matchedJobs = alljobs.map((job) => ({
-        ...job,
-        match: getJobMatchScore(job, skills),
-      }));
-
-      const filteredMatchedJobs = matchedJobs.filter((job) => job.match >= 20);
-      setTimeout(() => {
-        setJobs(filteredMatchedJobs);
+      if (!skills?.length) {
         setLoading(false);
-      }, 3000);
+        return;
+      }
+
+      const key = [...skills].sort().join(","); // Generate a stable key
+
+      try {
+        const alljobs = await fetchWithCache(key, fetchAllJobs);
+
+        if (!isMounted) return;
+
+        const matchedJobs = alljobs.map((job) => ({
+          ...job,
+          match: getJobMatchScore(job, skills),
+        }));
+
+        const filteredMatchedJobs = matchedJobs.filter(
+          (job) => job.match >= 20
+        );
+        setTimeout(() => setJobs(filteredMatchedJobs), 1000);
+      } catch (err) {
+        console.log("Error:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getJobs();
+
+    return () => {
+      isMounted = false;
+    };
   }, [skills]);
 
   const totalMatches = jobs?.length;
 
-  const topMatch = jobs.reduce(
-    (best, current) => (current.match > best.match ? current : best),
-    jobs[0] || null
-  );
+  const topMatch = useMemo(() => {
+    return jobs.reduce(
+      (best, current) => (current.match > best.match ? current : best),
+      jobs[0] || null
+    );
+  }, [jobs]);
 
   const topSkill = skills?.technical[0] || skills?.soft[0] || "-";
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     resetResume();
     setShouldShowToast(false);
     navigate("/resume", { state: { skipToast: true } });
     toast.success("Resume data cleared. Ready to start over!", {
       duration: 8000,
     });
-  };
+  }, [resetResume]);
 
   return (
     <motion.main

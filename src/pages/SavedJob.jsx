@@ -5,16 +5,18 @@ import Button from "../components/ui/Button";
 import JobCard from "../components/job/JobCard";
 import { Toaster } from "react-hot-toast";
 import PaginateJob from "../utils/PaginateJob";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const SavedJob = () => {
   const { savedJobs, clearSavedJobs } = useSavedJobStore();
   const [currentPage, setCurrentPage] = useState(0);
 
   const jobsPerPage = 5;
-  const offset = currentPage * jobsPerPage;
-  const currentJobs = savedJobs.slice(offset, offset + jobsPerPage);
-  console.log(currentJobs);
+
+  const currentJobs = useMemo(() => {
+    const offset = currentPage * jobsPerPage;
+    return savedJobs.slice(offset, offset + jobsPerPage);
+  }, [jobsPerPage, currentPage, savedJobs]);
 
   return (
     <main>
