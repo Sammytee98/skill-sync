@@ -70,7 +70,7 @@ const ResumeInput = () => {
 
   const isEmpty = resumeText.trim().length === 0;
 
-  const handleNext = useCallback(() => setShowPreview(true), []);
+  const handleNext = useCallback(() => setShowPreview(true), [isEmpty]);
 
   return (
     <motion.main

@@ -1,55 +1,70 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import MainLayout from "./layouts/MainLayouts";
 import Home from "./pages/Home";
-import ResumeInput from "./pages/ResumeInput";
-import Jobs from "./pages/Jobs";
-import Result from "./pages/Result";
-import JobDetails from "./pages/JobDetails";
 import SavedJob from "./pages/SavedJob";
+import LoadingSpinner from "./components/ui/LoadingSpinner";
 import ResumeGuard from "./components/guards/ResumeGuard";
+import LazyWrapper from "./components/routing/LazyWrapper";
+
+const ResumeInput = lazy(() => import("./pages/ResumeInput"));
+const Jobs = lazy(() => import("./pages/Jobs"));
+const Result = lazy(() => import("./pages/Result"));
+const JobDetails = lazy(() => import("./pages/JobDetails"));
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="resume" element={<ResumeInput />} />
-          <Route
-            path="resume/result"
-            element={
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="resume/"
+          element={
+            <LazyWrapper>
+              <ResumeInput />
+            </LazyWrapper>
+          }
+        />
+        <Route
+          path="resume/result"
+          element={
+            <LazyWrapper>
               <ResumeGuard>
                 <Result />
               </ResumeGuard>
-            }
-          />
-          <Route
-            path="resume/result/jobs"
-            element={
+            </LazyWrapper>
+          }
+        />
+        <Route
+          path="resume/result/jobs"
+          element={
+            <LazyWrapper>
               <ResumeGuard>
                 <Jobs />
               </ResumeGuard>
-            }
-          />
-          <Route
-            path="resume/result/jobs/:id"
-            element={
+            </LazyWrapper>
+          }
+        />
+        <Route
+          path="resume/result/jobs/:id"
+          element={
+            <LazyWrapper>
               <ResumeGuard>
                 <JobDetails />
               </ResumeGuard>
-            }
-          />
-          <Route
-            path="saved-jobs"
-            element={
-              <ResumeGuard>
-                <SavedJob />
-              </ResumeGuard>
-            }
-          />
-        </Route>
-      </Routes>
-    </>
+            </LazyWrapper>
+          }
+        />
+        <Route
+          path="saved-jobs"
+          element={
+            <ResumeGuard>
+              <SavedJob />
+            </ResumeGuard>
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
 

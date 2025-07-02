@@ -74,9 +74,9 @@ const Result = () => {
   const topSkill = skills?.technical[0] || skills?.soft[0] || "-";
 
   const handleReset = useCallback(() => {
-    resetResume();
     setShouldShowToast(false);
-    navigate("/resume", { state: { skipToast: true } });
+    resetResume();
+    navigate("/resume");
     toast.success("Resume data cleared. Ready to start over!", {
       duration: 8000,
     });

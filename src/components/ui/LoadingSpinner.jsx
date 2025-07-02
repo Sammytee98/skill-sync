@@ -1,32 +1,25 @@
-import { motion } from "framer-motion";
+import { memo } from "react";
 
-const spinnerVariants = {
-  spin: {
-    rotate: 360,
-    transition: {
-      repeat: Infinity,
-      duration: 0.8,
-      ease: "linear",
-    },
-  },
-};
-
-const LoadingSpinner = ({ size = 25, color = "orange" }) => {
+const LoadingSpinner = ({ size = 50, color = "blue" }) => {
   return (
-    <motion.div
-      className="border-5 rounded-full"
+    <div
+      className="border-7 rounded-full animate-spin mx-auto mt-8"
       style={{
         width: size,
         height: size,
         borderColor: color,
-        borderTopColor: "transparent",
+        borderTopColor: "gray",
       }}
-      variants={spinnerVariants}
-      animate="spin"
     >
       <div></div>
-    </motion.div>
+    </div>
   );
 };
 
-export default LoadingSpinner;
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.size === nextProps.size && prevProps.color === nextProps.color
+  );
+};
+
+export default memo(LoadingSpinner, areEqual);
