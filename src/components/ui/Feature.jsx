@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Feature = ({ offer }) => {
   return (
     <div className="bg-[rgb(var(--color-bg-neutral))] border-[rgb(var(--color-border))] border-t-2 border-b-2 rounded-2xl p-6 transition hover:scale-[1.03]">
@@ -10,4 +12,11 @@ const Feature = ({ offer }) => {
   );
 };
 
-export default Feature;
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.offer.title === nextProps.offer.title &&
+    prevProps.offer.desc === nextProps.offer.desc
+  );
+};
+
+export default memo(Feature, areEqual);

@@ -3,7 +3,7 @@ import JobCard from "../components/job/JobCard";
 import { motion } from "framer-motion";
 import BackButton from "../components/ui/BackButton";
 import { Toaster } from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PaginateJob from "../utils/PaginateJob";
 import Search from "../components/ui/Search";
 import Filter from "../components/ui/Filter";
@@ -39,14 +39,16 @@ const Jobs = () => {
     }, 300);
     return () => clearTimeout(debounce);
   }, [jobs, searchTerm, locationFilter]);
-  console.log(filteredJobs);
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(0);
 
   const jobsPerPage = 10;
-  const offset = currentPage * jobsPerPage;
-  const currentJobs = filteredJobs.slice(offset, offset + jobsPerPage);
+
+  const currentJobs = useMemo(() => {
+    const offset = currentPage * jobsPerPage;
+    return filteredJobs.slice(offset, offset + jobsPerPage);
+  }, [jobsPerPage, currentPage, filteredJobs]);
 
   return (
     <motion.main

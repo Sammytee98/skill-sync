@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useGuardStore = create((set) => ({
-  shouldShowToast: true,
+  shouldShowToast: false,
   setShouldShowToast: (value) => set({ shouldShowToast: value }),
 }));
 
