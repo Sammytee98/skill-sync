@@ -21,9 +21,8 @@ const Hero = () => {
           Instantly See How Well You Match a Job
         </h1>
         <p className="text-base text-[rgb(var(--color-muted))] leading-relaxed">
-          Paste your resume and a job description &mdash; SkillSync compares
-          then using AI to find your strengths and gaps. Know exactly where you
-          stand.
+          Paste your resume and a job description, SkillSync compares then using
+          AI to find your strengths and gaps. Know exactly where you stand.
         </p>
         <Button onClick={handleClick} children="Start Matching" />
       </motion.div>
