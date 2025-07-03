@@ -1,6 +1,6 @@
 ## SkillSync
 
-SkillSync is an intelligent career tool that helps job seekers extract skills from their resume, then match them with highly relevant remote job opportunities. From parsing resumes to filtering top-matched jobs, SkillSync simplifies the job hunting experience—automatically and accurately.
+SkillSync is an intelligent career tool that helps job seekers extract skills from their resume, then match them with highly relevant remote job opportunities. From parsing resumes to filtering top-matched jobs, SkillSync simplifies the job hunting experience, automatically and accurately.
 
 ## Live Demo
 
@@ -65,8 +65,11 @@ SkillSync is a resume-powered job matcher that:
 If you want to run locally:
 
 git clone https://github.com/your-username/skillsync.git
+
 cd skillsync
+
 npm install
+
 npm run dev
 
 ## Contribution
