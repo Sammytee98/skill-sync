@@ -1,9 +1,8 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import { lazy } from "react";
 import MainLayout from "./layouts/MainLayouts";
 import Home from "./pages/Home";
 import SavedJob from "./pages/SavedJob";
-import LoadingSpinner from "./components/ui/LoadingSpinner";
 import ResumeGuard from "./components/guards/ResumeGuard";
 import LazyWrapper from "./components/routing/LazyWrapper";
 
