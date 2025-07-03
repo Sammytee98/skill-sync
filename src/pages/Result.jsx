@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getJobMatchScore } from "../utils/matchJobsToSkills";
 import useResumeStore from "../store/useResumeStore";
 import { fetchAllJobs } from "../utils/fetchAllJobs";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import SectionWrapper from "../components/layouts/SectionWrapper";
 import Button from "../components/ui/Button";
@@ -21,18 +21,14 @@ const Result = () => {
   const { setShouldShowToast } = useGuardStore();
   const [loading, setLoading] = useState(true);
   const skills = resumeInsights?.skills;
-  const fetchWithCache = useCachedFetch();
+  const { fetchWithCache, clearCache } = useCachedFetch();
 
   useEffect(() => {
+    if (!skills || skills?.length === 0) return;
     let isMounted = true;
 
     const getJobs = async () => {
-      if (!skills?.length) {
-        setLoading(false);
-        return;
-      }
-
-      const key = [...skills].sort().join(","); // Generate a stable key
+      const key = [...skills?.technical].sort().join(","); // Generate a stable key
 
       try {
         const alljobs = await fetchWithCache(key, fetchAllJobs);
@@ -60,7 +56,7 @@ const Result = () => {
     return () => {
       isMounted = false;
     };
-  }, [skills]);
+  }, [skills, fetchWithCache]);
 
   const totalMatches = jobs?.length;
 
@@ -74,13 +70,15 @@ const Result = () => {
   const topSkill = skills?.technical[0] || skills?.soft[0] || "-";
 
   const handleReset = useCallback(() => {
+    clearCache();
     setShouldShowToast(false);
     resetResume();
+    setJobs([]);
     navigate("/resume");
     toast.success("Resume data cleared. Ready to start over!", {
-      duration: 8000,
+      duration: 5000,
     });
-  }, [resetResume]);
+  }, [resetResume, clearCache]);
 
   return (
     <motion.main
@@ -92,14 +90,7 @@ const Result = () => {
     >
       <BackButton to="/resume" />
 
-      {loading && (
-        <div className="flex items-center space-x-2 mt-5 mx-auto w-fit">
-          <LoadingSpinner color="blue" />{" "}
-          <span className="font-medium text-[rgb(var(--color-muted))]">
-            searching for jobs...
-          </span>
-        </div>
-      )}
+      {loading && <LoadingSpinner color="blue" />}
       {!jobs && !loading && (
         <p className="text-xl text-[rgb(var(--color-muted))] font-medium text-center mt-5">
           No available jobs

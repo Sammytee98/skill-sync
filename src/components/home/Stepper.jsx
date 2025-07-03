@@ -9,10 +9,10 @@ const Stepper = () => {
           <strong>Step 1:</strong> Paste your resume
         </li>
         <li>
-          <strong>Step 2:</strong> Paste a job description
+          <strong>Step 2:</strong> Extract and edit your skills
         </li>
         <li>
-          <strong>Step 3:</strong> View match score & missing skills
+          <strong>Step 3:</strong> View match jobs
         </li>
       </ol>
     </>

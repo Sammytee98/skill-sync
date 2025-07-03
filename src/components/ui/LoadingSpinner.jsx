@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const LoadingSpinner = ({ size = 50, color = "blue" }) => {
+const LoadingSpinner = ({ size = 25, color = "blue" }) => {
   return (
     <div
       className="border-7 rounded-full animate-spin mx-auto mt-8"
