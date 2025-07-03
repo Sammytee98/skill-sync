@@ -33,7 +33,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full mx-auto"
+        className="w-[400px] h-[400px] rounded-full mx-auto"
       >
         <img
           src={AiIllustrator}

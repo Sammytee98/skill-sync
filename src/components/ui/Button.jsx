@@ -17,7 +17,7 @@ const Button = ({
     primary:
       "text-sm bg-[rgb(var(--color-brand))]  hover:bg-[rgb(var(--color-brand-hover))] border-2 border-[rgb(var(--color-brand))] hover:border-[rgb(var(--color-brand-hover))] shadow-[rgb(var(--color-brand))]  hover:shadow-[rgb(var(--color-brand-hover))] text-white ",
     danger:
-      "border-[rgb(var(--color-danger-btn))] border-2 text-[rgb(var(--color-danger-btn))] hover:text-white hover:bg-[rgb(var(--color-danger-btn))] shadow-[rgb(var(--color-danger-btn))] text-sm",
+      "border-[rgb(var(--color-danger-btn))] border-2 text-[rgb(var(--color-danger-btn))] hover:text-white hover:bg-[rgb(var(--color-danger-btn))] text-sm",
     outline:
       "border-2 border-[rgb(var(--color-outline-btn))] bg-[rgb(var(--color-outline-btn))] shadow-[rgb(var(--color-outline-btn))] text-sm text-[rgb(var(--color-text))]",
   };
