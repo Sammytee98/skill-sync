@@ -83,8 +83,8 @@ const ResumeInput = () => {
       <SectionWrapper className="space-y-10">
         <h2 className="text-2xl font-bold">Let's Start With Your Resume</h2>
         <p className="text-base text-[rgb(var(--color-muted))]">
-          Upload a resume or paste it below &mdash; we'll use it to find the
-          best job match for you.
+          Upload a resume or paste it below, we will use it to find the best job
+          match for you.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
