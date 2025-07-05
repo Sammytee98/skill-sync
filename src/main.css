@@ -45,6 +45,6 @@ html {
 }
 
 body {
-  @apply bg-[rgb(var(--color-bg))] text-[rgb(var(--color-text))] transition-colors duration-300;
+  @apply bg-[rgb(var(--color-bg))] text-[rgb(var(--color-text))] transition-colors duration-100;
   font-family: "poppins", sans-serif;
 }
